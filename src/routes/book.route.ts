@@ -14,8 +14,8 @@ router
 router
   .route('/:bookId')
   .get(validate(bookValidation.getBook), bookController.getBook)
-  .post(validate(bookValidation.updateBook), bookController.updateBook)
-  .put(validate(bookValidation.createBook), bookController.putBook)
-  .delete(validate(bookValidation.deleteBook), bookController.deleteBook);
+  .post(isAuth, validate(bookValidation.updateBook), bookController.updateBook)
+  .put(isAuth, validate(bookValidation.createBook), bookController.putBook)
+  .delete(isAuth, validate(bookValidation.deleteBook), bookController.deleteBook);
 
 export default router;

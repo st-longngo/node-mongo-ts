@@ -93,13 +93,7 @@ export const updateBook = catchAsync(async (req: Request, res: Response, next: N
 
 export const putBook = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const bookId = req.params.bookId || '';
-  const { title, authorId, publicationYear } = req.body;
-
-  const data = {
-    title,
-    authorId,
-    publicationYear,
-  } as IBook;
+  const data = req.body;
 
   try {
     const newBook = await bookService.putBookById(bookId, data);
@@ -111,7 +105,7 @@ export const putBook = catchAsync(async (req: Request, res: Response, next: Next
 
     res.status(httpStatus.OK).send(
       customResponse<typeof newBook>({
-        message: 'Update book successfully',
+        message: 'Upsert book successfully',
         status: httpStatus.OK,
         data: newBook,
       })
