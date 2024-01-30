@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import httpStatus from 'http-status';
 
 // Import Routes
-import router from '../src/api';
+import router from './api';
 import { errorConverter, errorHandler, ApiError } from './libs';
 
 // Import Api Docs
