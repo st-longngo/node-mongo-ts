@@ -19,3 +19,10 @@ router
   .delete(isAuth, validate(authorValidation.deleteAuthor), authorController.deleteAuthor);
 
 export default router;
+
+/**
+ * @swagger
+ * tags:
+ *   name: Author
+ *   description: Authentication
+ */

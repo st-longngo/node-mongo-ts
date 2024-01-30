@@ -1,7 +1,8 @@
 import express, { Router } from 'express';
 
 // Import routes
-import { healthCheckRoute, bookRoutes, authorRoutes, authRoutes } from '../routes';
+import { healthCheckRoute, bookRoutes, authorRoutes, authRoutes, docsRoute } from '../routes';
+import { config } from '../configs';
 
 const router = express.Router();
 
@@ -29,8 +30,23 @@ const defaultIRoute: IRoute[] = [
   },
 ];
 
+const devIRoute: IRoute[] = [
+  // IRoute available only in development mode
+  {
+    path: '/docs',
+    route: docsRoute,
+  },
+];
+
 defaultIRoute.forEach((route: IRoute) => {
   router.use(route.path, route.route);
 });
+
+if (config.env === 'local') {
+  /* istanbul ignore next */
+  devIRoute.forEach((route) => {
+    router.use(route.path, route.route);
+  });
+}
 
 export default router;
